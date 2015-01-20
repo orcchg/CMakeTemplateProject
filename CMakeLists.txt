@@ -60,17 +60,17 @@ ADD_SUBDIRECTORY( src )
 
 # -----------------------------------------------------------------------------
 # Documentation building
-#FIND_PROGRAM(DOXYGEN doxygen)
-#if ( DOXYGEN )
-#  set(DoxyfilePattern "${PROJECT_SOURCE_DIR}/../docs/Doxyfile.in.pattern")
-#  set(Doxyfile "${CMAKE_BINARY_DIR}/Doxyfile.in")
-#  message(STATUS "Building documentation based on (${Doxyfile}) ...")
-#
-#  FILE(READ ${DoxyfilePattern} DOXYFILE_CONTENT)
-#  set(SEARCH_REGEX "DOXYFILE_PROJECT_ROOT")
-#  STRING(REGEX REPLACE "${SEARCH_REGEX}" "${PROJECT_SOURCE_DIR}" MODIFIED_FILE_CONTENT "${DOXYFILE_CONTENT}")
-#  FILE(WRITE ${Doxyfile} "${MODIFIED_FILE_CONTENT}")
-#
-#  execute_process(COMMAND ${DOXYGEN} ${Doxyfile})
-#endif()
+FIND_PROGRAM(DOXYGEN doxygen)
+if ( DOXYGEN )
+  set(DoxyfilePattern "${PROJECT_SOURCE_DIR}/docs/Doxyfile.in.pattern")
+  set(Doxyfile "${CMAKE_BINARY_DIR}/Doxyfile.in")
+  message(STATUS "Building documentation based on (${Doxyfile}) ...")
+
+  FILE(READ ${DoxyfilePattern} DOXYFILE_CONTENT)
+  set(SEARCH_REGEX "DOXYFILE_PROJECT_ROOT")
+  STRING(REGEX REPLACE "${SEARCH_REGEX}" "${PROJECT_SOURCE_DIR}" MODIFIED_FILE_CONTENT "${DOXYFILE_CONTENT}")
+  FILE(WRITE ${Doxyfile} "${MODIFIED_FILE_CONTENT}")
+
+  execute_process(COMMAND ${DOXYGEN} ${Doxyfile})
+endif()
 
